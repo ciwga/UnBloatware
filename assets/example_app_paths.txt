@@ -1,0 +1,16 @@
+/system/app/Chrome/
+/system/app/CalendarGoogle/
+/system/app/Drive/
+/system/app/Email/
+/system/app/Gmail2/
+/system/app/Maps/
+/system/app/Music2/
+/system/app/OneNote/
+/system/app/Photos/
+/system/app/talkback/
+/system/app/Videos/
+/system/app/Youtube/
+/system/priv-app/TagGoogle/
+/system/priv-app/Velvet/
+/system/vendor/priv-app/Stk1/
+/system/vendor/operator/app/*.apk
