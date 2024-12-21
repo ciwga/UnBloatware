@@ -1,6 +1,11 @@
 # UnBloatware
+<p align="center">
+  <img src="assets/android_debloater.ico" alt="UnBloatware Logo" />
+</p>
 
-UnBloatware is a Python application that helps you uninstall bloatware apps from your android phone.
+<p align="center">
+  UnBloatware is a Python application that helps you uninstall bloatware apps from your android phone.
+</p>
 
 ## Features
 
