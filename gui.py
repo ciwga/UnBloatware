@@ -231,11 +231,11 @@ class GUI:
         pass
 
     def start_adb(self) -> None:
-        """Start the ADB server (to be implemented)."""
+        """Start the ADB server (overridden in AndroidDebloater class)."""
         pass
 
     def stop_adb(self) -> None:
-        """Stop the ADB server (to be implemented)."""
+        """Stop the ADB server (overridden in AndroidDebloater class)."""
         pass
 
     def on_close(self) -> None:
@@ -244,24 +244,20 @@ class GUI:
         self.root.destroy()
 
     def get_device_name(self) -> None:
-        """Get the device name (to be implemented)."""
+        """Get the device name (overridden in AndroidDebloater class)."""
         pass
 
     def load_applications(self) -> None:
-        """Load applications from the device (to be implemented)."""
+        """Load applications from the device (overridden in AndroidDebloater class)."""
         pass
 
     def debloat_selected(self, package_tree: ttk.Treeview = None) -> None:
         """
-        Uninstall the selected applications.
-
-        Args:
-            package_tree (ttk.Treeview, optional): The tree view containing the selected packages.
-        """
+        Uninstall the selected applications. (overridden in AndroidDebloater class)."""
         pass
 
     def remove_apps_from_path(self) -> None:
-        """Remove applications listed in a text file (to be implemented)."""
+        """Remove applications listed in a text file (overridden in AndroidDebloater class)."""
         pass
 
     def update_app_tree(self) -> None:
@@ -523,7 +519,8 @@ class Terminal:
                 stderr=subprocess.PIPE,
                 text=True,
                 bufsize=1,
-                universal_newlines=True
+                universal_newlines=True,
+                creationflags=subprocess.CREATE_NO_WINDOW
             )
 
             threading.Thread(target=self._read_process_output, daemon=True).start()
@@ -560,7 +557,12 @@ class Terminal:
     def _check_root_access(self) -> bool:
         """Check if the device has root access."""
         check_command = [str(self.adb_path), "-s", self.device_id, "shell", "su", "-c", "echo rooted"]
-        result = subprocess.run(check_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        result = subprocess.run(check_command,                 
+                                check=True,
+                                text=True,
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE,
+                                creationflags=subprocess.CREATE_NO_WINDOW)
         if "rooted" in result.stdout:
             return True
         self.terminal_text.insert(tk.END, "Root access is required for this command\n", "command_output")
