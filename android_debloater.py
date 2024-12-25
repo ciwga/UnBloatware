@@ -248,8 +248,11 @@ class AndroidDebloater(GUI, DefaultPackageManager):
 
     def _select_and_process_file(self) -> None:
         """Open a file dialog to select a text file and process it in a separate thread."""
+        exe_directory = Path(__file__).parent.resolve()
+        initial_directory = exe_directory / 'assets'
         txt_file_path = filedialog.askopenfilename(
             title="Select Txt File",
+            initialdir=initial_directory,
             filetypes=(("Text Files", "*.txt"), ("All Files", "*.*"))
         )
 
